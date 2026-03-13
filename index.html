@@ -1,0 +1,1075 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reem Awad — Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Sora:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --cream: #f5f0e8;
+  --warm-white: #faf8f4;
+  --ink: #1a1612;
+  --ink-light: #3d362e;
+  --ink-muted: #7a7068;
+  --ink-faint: #b0a89e;
+  --rust: #c4501a;
+  --rust-bg: rgba(196, 80, 26, 0.06);
+  --rust-border: rgba(196, 80, 26, 0.15);
+  --teal: #1a6b5a;
+  --shadow-sm: 0 1px 3px rgba(26,22,18,0.06);
+  --shadow-md: 0 4px 20px rgba(26,22,18,0.08);
+  --shadow-lg: 0 12px 40px rgba(26,22,18,0.1);
+  --radius: 4px;
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Sora', sans-serif;
+  background: var(--cream);
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+::selection { background: var(--rust); color: var(--cream); }
+
+.topbar {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+  height: 56px; background: var(--cream);
+  border-bottom: 1px solid rgba(26,22,18,0.08);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 clamp(24px, 4vw, 60px);
+  transition: box-shadow 0.3s ease;
+}
+.topbar.scrolled { box-shadow: var(--shadow-sm); }
+
+.topbar-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 18px; font-weight: 700; color: var(--ink);
+  cursor: pointer;
+}
+
+.topbar-nav { display: flex; gap: 28px; list-style: none; }
+.topbar-nav a {
+  font-size: 12px; font-weight: 600; letter-spacing: 0.08em;
+  text-transform: uppercase; color: var(--ink-muted);
+  text-decoration: none; transition: color 0.3s var(--ease);
+  position: relative; padding-bottom: 2px;
+}
+.topbar-nav a::after {
+  content: ''; position: absolute; bottom: -2px; left: 0;
+  width: 0; height: 1.5px; background: var(--rust);
+  transition: width 0.35s var(--ease);
+}
+.topbar-nav a:hover::after, .topbar-nav a.active::after { width: 100%; }
+.topbar-nav a:hover, .topbar-nav a.active { color: var(--rust); }
+
+.mobile-toggle {
+  display: none; background: none; border: none;
+  font-size: 22px; color: var(--ink); cursor: pointer;
+}
+
+.page { padding-top: 56px; }
+
+section {
+  opacity: 0; transform: translateY(28px);
+  transition: opacity 0.65s ease, transform 0.65s ease;
+}
+section.vis { opacity: 1; transform: none; }
+
+/* ── Hero ── */
+.hero {
+  min-height: calc(100vh - 56px);
+  display: flex; align-items: center;
+  padding: 80px clamp(24px, 4vw, 60px);
+  opacity: 1; transform: none;
+}
+.hero-inner { max-width: 640px; }
+
+.hero-overline {
+  font-size: 14px; font-weight: 500; color: var(--ink-muted);
+  margin-bottom: 28px; line-height: 1.6;
+  opacity: 0; animation: slideUp 0.6s 0.2s var(--ease) forwards;
+}
+
+.hero-main {
+  opacity: 0; animation: slideUp 0.6s 0.35s var(--ease) forwards;
+}
+
+.hero-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(52px, 7vw, 88px); font-weight: 900;
+  line-height: 1.02; letter-spacing: -0.03em; color: var(--ink);
+  margin-bottom: 24px;
+}
+.hero-title .italic { font-style: italic; font-weight: 400; color: var(--rust); }
+
+.hero-blurb {
+  font-size: 16px; line-height: 1.75; color: var(--ink-light);
+  margin-bottom: 36px; max-width: 700px;
+}
+
+.hero-actions {
+  display: flex; gap: 14px; flex-wrap: wrap;
+}
+
+.hero-row { display: none; }
+
+.btn-fill {
+  padding: 13px 26px; background: var(--ink); color: var(--cream);
+  font-family: 'Sora', sans-serif; font-size: 13px; font-weight: 600;
+  letter-spacing: 0.03em; border: 2px solid var(--ink);
+  border-radius: var(--radius); cursor: pointer; text-decoration: none;
+  transition: all 0.3s var(--ease);
+}
+.btn-fill:hover {
+  background: var(--rust); border-color: var(--rust);
+  transform: translateY(-2px); box-shadow: 0 6px 20px rgba(196,80,26,0.2);
+}
+
+.btn-outline {
+  padding: 13px 26px; background: transparent; color: var(--ink);
+  font-family: 'Sora', sans-serif; font-size: 13px; font-weight: 600;
+  letter-spacing: 0.03em; border: 2px solid rgba(26,22,18,0.15);
+  border-radius: var(--radius); cursor: pointer; text-decoration: none;
+  transition: all 0.3s var(--ease);
+}
+.btn-outline:hover { border-color: var(--ink); transform: translateY(-2px); }
+
+/* ── Section headers ── */
+.sec-header { padding: 100px clamp(24px, 4vw, 60px) 48px; max-width: 900px; }
+.sec-eyebrow {
+  font-size: 11px; font-weight: 600; letter-spacing: 0.16em;
+  text-transform: uppercase; color: var(--rust); margin-bottom: 14px;
+}
+.sec-heading {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(32px, 4vw, 52px); font-weight: 900;
+  line-height: 1.1; letter-spacing: -0.02em; color: var(--ink);
+}
+
+/* ── About ── */
+.about-content {
+  padding: 0 clamp(24px, 4vw, 60px) 80px;
+  max-width: 720px;
+}
+.about-content p {
+  font-size: 16px; line-height: 1.8; color: var(--ink-light);
+}
+
+/* ── Skills ── */
+.skills-section { padding: 0 clamp(24px, 4vw, 60px) 80px; }
+
+.skills-marquee {
+  overflow: hidden; padding: 24px 0;
+  border-top: 1px solid rgba(26,22,18,0.08);
+  border-bottom: 1px solid rgba(26,22,18,0.08);
+  margin-bottom: 48px; position: relative;
+}
+.skills-marquee::before, .skills-marquee::after {
+  content: ''; position: absolute; top: 0; bottom: 0;
+  width: 80px; z-index: 2; pointer-events: none;
+}
+.skills-marquee::before { left: 0; background: linear-gradient(to right, var(--cream), transparent); }
+.skills-marquee::after { right: 0; background: linear-gradient(to left, var(--cream), transparent); }
+
+.marquee-track {
+  display: flex; gap: 40px;
+  animation: marquee 35s linear infinite; width: max-content;
+}
+.marquee-item {
+  font-family: 'IBM Plex Mono', monospace; font-size: 13px; font-weight: 500;
+  color: var(--ink-muted); white-space: nowrap;
+  display: flex; align-items: center; gap: 12px;
+}
+.marquee-item::after { content: '◆'; font-size: 6px; color: var(--rust); }
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+.skills-cols {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 24px; max-width: 1000px; margin: 0 auto;
+}
+.skills-cols-bottom {
+  display: grid; grid-template-columns: repeat(2, 1fr);
+  gap: 24px; max-width: 660px; margin: 24px auto 0;
+}
+
+.skill-block {
+  background: var(--warm-white); border: 1px solid rgba(26,22,18,0.06);
+  border-radius: var(--radius); padding: 28px; transition: all 0.3s var(--ease);
+}
+.skill-block:hover {
+  box-shadow: var(--shadow-md); transform: translateY(-3px); border-color: var(--rust-border);
+}
+.skill-block-num {
+  font-family: 'Playfair Display', serif; font-size: 32px;
+  font-weight: 900; color: var(--rust); line-height: 1; margin-bottom: 12px;
+}
+.skill-block h3 { font-size: 15px; font-weight: 700; margin-bottom: 14px; color: var(--ink); }
+
+.skill-pills { display: flex; flex-wrap: wrap; gap: 6px; }
+.skill-pill {
+  font-family: 'IBM Plex Mono', monospace; font-size: 11px; font-weight: 500;
+  padding: 4px 10px; background: var(--cream);
+  border: 1px solid rgba(26,22,18,0.06); border-radius: 100px;
+  color: var(--ink-light); transition: all 0.25s ease;
+}
+.skill-block:hover .skill-pill { border-color: var(--rust-border); color: var(--rust); }
+
+/* ── Projects ── */
+.projects-section { padding: 0 clamp(24px, 4vw, 60px) 100px; }
+.project-grid { display: grid; gap: 32px; }
+
+.pcard {
+  display: grid; grid-template-columns: 120px 1fr; gap: 0;
+  background: var(--warm-white); border: 1px solid rgba(26,22,18,0.06);
+  border-radius: var(--radius); overflow: hidden; transition: all 0.35s var(--ease);
+}
+.pcard:hover {
+  box-shadow: var(--shadow-lg); transform: translateY(-4px);
+  border-color: rgba(26,22,18,0.1);
+}
+
+.pcard-side {
+  background: var(--ink);
+  display: flex; flex-direction: column; align-items: center;
+  justify-content: center; padding: 32px 16px; position: relative; overflow: hidden;
+}
+.pcard-side::before {
+  content: ''; position: absolute; inset: 0; background: var(--rust);
+  transform: translateY(100%); transition: transform 0.5s var(--ease);
+}
+.pcard:hover .pcard-side::before { transform: translateY(0); }
+
+.pcard-num {
+  font-family: 'Playfair Display', serif; font-size: 40px;
+  font-weight: 900; color: var(--cream); position: relative; z-index: 1;
+}
+
+.pcard-body { padding: 36px 40px; }
+.pcard-title {
+  font-family: 'Playfair Display', serif; font-size: 24px; font-weight: 700;
+  color: var(--ink); margin-bottom: 6px; transition: color 0.3s ease;
+}
+.pcard:hover .pcard-title { color: var(--rust); }
+.pcard-role {
+  font-size: 12px; font-weight: 600; letter-spacing: 0.08em;
+  text-transform: uppercase; color: var(--rust); margin-bottom: 16px;
+}
+
+.pcard-bullets {
+  list-style: none; display: flex; flex-direction: column; gap: 7px;
+  margin-bottom: 18px; max-width: 640px;
+}
+.pcard-bullets li {
+  font-size: 13.5px; color: var(--ink-light); line-height: 1.55;
+  padding-left: 16px; position: relative;
+}
+.pcard-bullets li::before {
+  content: ''; position: absolute; left: 0; top: 8px;
+  width: 5px; height: 5px; border-radius: 50%;
+  background: var(--rust); opacity: 0.6;
+}
+
+.pcard-links { display: flex; gap: 10px; margin-bottom: 16px; flex-wrap: wrap; }
+.pcard-link {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 8px 16px;
+  background: var(--rust-bg); border: 1px solid var(--rust-border);
+  border-radius: var(--radius); color: var(--rust);
+  font-size: 12.5px; font-weight: 600; text-decoration: none;
+  transition: all 0.3s var(--ease);
+}
+.pcard-link:hover {
+  background: var(--rust); color: var(--cream); border-color: var(--rust);
+  transform: translateY(-1px); box-shadow: 0 4px 12px rgba(196,80,26,0.2);
+}
+.pcard-link svg {
+  width: 14px; height: 14px; fill: none; stroke: currentColor; stroke-width: 2;
+  stroke-linecap: round; stroke-linejoin: round;
+}
+
+.pcard-tech { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 14px; }
+.pcard-tech span {
+  font-family: 'IBM Plex Mono', monospace; font-size: 11px; font-weight: 500;
+  padding: 4px 10px; background: rgba(26,22,18,0.03);
+  border: 1px solid rgba(26,22,18,0.06); border-radius: 100px; color: var(--ink-muted);
+}
+
+.pcard-expand-content {
+  max-height: 0; overflow: hidden;
+  transition: max-height 0.5s var(--ease), opacity 0.4s ease; opacity: 0;
+}
+.pcard.open .pcard-expand-content { max-height: 900px; opacity: 1; }
+
+.pcard-expand-inner {
+  padding-top: 16px; border-top: 1px solid rgba(26,22,18,0.06);
+  font-size: 14px; line-height: 1.7; color: var(--ink-muted);
+}
+.pcard-expand-inner p { margin-bottom: 12px; }
+.pcard-expand-inner p:last-child { margin-bottom: 0; }
+
+.toggle-btn {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 12px; font-weight: 600; color: var(--ink-muted);
+  background: none; border: none; cursor: pointer;
+  transition: color 0.3s ease; font-family: 'Sora', sans-serif; padding: 0;
+}
+.toggle-btn:hover { color: var(--rust); }
+.toggle-btn .arrow { transition: transform 0.3s var(--ease); display: inline-block; }
+
+/* ── Experience ── */
+.exp-section { padding: 0 clamp(24px, 4vw, 60px) 100px; }
+.exp-list { max-width: 780px; }
+
+.exp-item {
+  display: grid; grid-template-columns: 180px 1fr; gap: 36px;
+  padding: 36px 0; border-bottom: 1px solid rgba(26,22,18,0.08);
+  transition: all 0.3s ease;
+}
+.exp-item:first-child { border-top: 1px solid rgba(26,22,18,0.08); }
+.exp-item:hover { padding-left: 12px; }
+
+.exp-meta { text-align: right; }
+.exp-date {
+  font-family: 'IBM Plex Mono', monospace; font-size: 12px;
+  font-weight: 500; color: var(--rust); margin-bottom: 4px;
+}
+.exp-loc { font-size: 12px; color: var(--ink-faint); }
+
+.exp-content h3 {
+  font-family: 'Playfair Display', serif; font-size: 22px;
+  font-weight: 700; margin-bottom: 4px; color: var(--ink);
+}
+.exp-company { font-size: 13px; font-weight: 500; color: var(--ink-muted); margin-bottom: 14px; }
+
+.exp-bullets {
+  list-style: none; display: flex; flex-direction: column; gap: 7px; margin-bottom: 12px;
+}
+.exp-bullets li {
+  font-size: 13.5px; color: var(--ink-light); line-height: 1.55;
+  padding-left: 16px; position: relative;
+}
+.exp-bullets li::before {
+  content: ''; position: absolute; left: 0; top: 8px;
+  width: 5px; height: 5px; border-radius: 50%;
+  background: var(--rust); opacity: 0.5;
+}
+
+.exp-expand {
+  max-height: 0; overflow: hidden;
+  transition: max-height 0.5s var(--ease), opacity 0.4s ease; opacity: 0;
+}
+.exp-item.open .exp-expand { max-height: 800px; opacity: 1; }
+.exp-item.open .toggle-btn .arrow { transform: rotate(180deg); }
+
+.exp-expand-inner {
+  padding-top: 14px; border-top: 1px solid rgba(26,22,18,0.06);
+  font-size: 13.5px; line-height: 1.7; color: var(--ink-muted); max-width: 560px;
+}
+.exp-expand-inner p { margin-bottom: 12px; }
+.exp-expand-inner p:last-child { margin-bottom: 0; }
+
+/* ── Community / Additional ── */
+.community-section { padding: 0 clamp(24px, 4vw, 60px) 100px; }
+
+.community-strip {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px;
+}
+
+.com-card {
+  padding: 28px; border: 1px solid rgba(26,22,18,0.08);
+  border-radius: var(--radius); background: var(--warm-white);
+  transition: all 0.3s var(--ease); position: relative; overflow: hidden;
+}
+.com-card::before {
+  content: ''; position: absolute; top: 0; left: 0;
+  width: 3px; height: 100%; background: var(--rust);
+  transform: scaleY(0); transform-origin: top;
+  transition: transform 0.35s var(--ease);
+}
+.com-card:hover::before { transform: scaleY(1); }
+.com-card:hover { box-shadow: var(--shadow-md); transform: translateY(-2px); }
+
+.com-card h4 {
+  font-family: 'Playfair Display', serif; font-size: 17px;
+  font-weight: 700; margin-bottom: 10px; color: var(--ink);
+}
+
+.com-bullets {
+  list-style: none; display: flex; flex-direction: column; gap: 5px; margin-bottom: 10px;
+}
+.com-bullets li {
+  font-size: 12.5px; color: var(--ink-muted); line-height: 1.5;
+  padding-left: 14px; position: relative;
+}
+.com-bullets li::before {
+  content: ''; position: absolute; left: 0; top: 7px;
+  width: 4px; height: 4px; border-radius: 50%;
+  background: var(--rust); opacity: 0.5;
+}
+
+.com-expand {
+  max-height: 0; overflow: hidden;
+  transition: max-height 0.4s var(--ease), opacity 0.35s ease; opacity: 0;
+}
+.com-card.open .com-expand { max-height: 400px; opacity: 1; }
+.com-card.open .toggle-btn .arrow { transform: rotate(180deg); }
+
+.com-expand-inner {
+  padding-top: 10px; border-top: 1px solid rgba(26,22,18,0.06);
+  font-size: 13px; line-height: 1.65; color: var(--ink-muted);
+}
+
+.com-card-link {
+  display: inline-flex; align-items: center; gap: 6px;
+  margin-top: 10px; padding: 6px 14px;
+  background: var(--rust-bg); border: 1px solid var(--rust-border);
+  border-radius: var(--radius); font-size: 12px; font-weight: 600;
+  color: var(--rust); text-decoration: none; transition: all 0.3s var(--ease);
+}
+.com-card-link:hover { background: var(--rust); color: var(--cream); border-color: var(--rust); }
+
+/* Early projects - same expand pattern */
+.early-projects {
+  margin-top: 40px; padding-top: 40px;
+  border-top: 1px solid rgba(26,22,18,0.08);
+}
+.early-projects > h3 {
+  font-family: 'Playfair Display', serif; font-size: 24px;
+  font-weight: 700; margin-bottom: 8px; color: var(--ink);
+}
+.early-projects > p {
+  font-size: 14px; line-height: 1.7; color: var(--ink-muted); margin-bottom: 20px;
+}
+.early-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+.early-card {
+  padding: 24px; background: var(--warm-white);
+  border: 1px solid rgba(26,22,18,0.06); border-radius: var(--radius);
+  transition: all 0.3s var(--ease);
+}
+.early-card:hover { box-shadow: var(--shadow-md); transform: translateY(-2px); border-color: var(--rust-border); }
+.early-card h4 {
+  font-family: 'Playfair Display', serif; font-size: 16px;
+  font-weight: 700; margin-bottom: 8px; color: var(--ink);
+}
+
+.early-bullets {
+  list-style: none; display: flex; flex-direction: column; gap: 5px; margin-bottom: 10px;
+}
+.early-bullets li {
+  font-size: 12.5px; color: var(--ink-muted); line-height: 1.5;
+  padding-left: 14px; position: relative;
+}
+.early-bullets li::before {
+  content: ''; position: absolute; left: 0; top: 7px;
+  width: 4px; height: 4px; border-radius: 50%;
+  background: var(--rust); opacity: 0.5;
+}
+
+.early-expand {
+  max-height: 0; overflow: hidden;
+  transition: max-height 0.4s var(--ease), opacity 0.35s ease; opacity: 0;
+}
+.early-card.open .early-expand { max-height: 300px; opacity: 1; }
+.early-card.open .toggle-btn .arrow { transform: rotate(180deg); }
+
+.early-expand-inner {
+  padding-top: 10px; border-top: 1px solid rgba(26,22,18,0.06);
+  font-size: 13px; line-height: 1.65; color: var(--ink-muted);
+}
+
+/* ── Contact ── */
+.contact-section { padding: 0 clamp(24px, 4vw, 60px) 60px; }
+
+.contact-band {
+  background: var(--ink); border-radius: var(--radius); padding: 64px;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center;
+}
+.contact-left h2 {
+  font-family: 'Playfair Display', serif; font-size: 36px;
+  font-weight: 900; color: var(--cream); line-height: 1.15; margin-bottom: 14px;
+}
+.contact-left p { font-size: 14px; color: var(--ink-faint); line-height: 1.7; }
+
+.contact-links { display: flex; flex-direction: column; gap: 14px; }
+.contact-row {
+  display: flex; align-items: center; gap: 14px; text-decoration: none;
+  padding: 16px 20px; border-radius: var(--radius);
+  border: 1px solid rgba(245,240,232,0.08); transition: all 0.3s var(--ease);
+}
+.contact-row:hover {
+  border-color: var(--rust); background: rgba(196,80,26,0.08);
+  transform: translateX(4px);
+}
+.contact-row-icon {
+  width: 36px; height: 36px; border-radius: 50%;
+  background: rgba(245,240,232,0.06);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 14px; color: var(--cream); flex-shrink: 0;
+}
+.contact-row-text span {
+  display: block; font-size: 11px; font-weight: 600;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--ink-faint); margin-bottom: 2px;
+}
+.contact-row-text strong { font-size: 14px; font-weight: 500; color: var(--cream); }
+
+.footer {
+  padding: 32px clamp(24px, 4vw, 60px);
+  display: flex; justify-content: space-between; align-items: center;
+  font-size: 12px; color: var(--ink-faint);
+  border-top: 1px solid rgba(26,22,18,0.06);
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+/* open state for project cards */
+.pcard.open .toggle-btn .arrow { transform: rotate(180deg); }
+
+@media (max-width: 900px) {
+  .hero-title { white-space: normal; }
+  .exp-item { grid-template-columns: 1fr; gap: 8px; }
+  .exp-meta { text-align: left; }
+  .contact-band { grid-template-columns: 1fr; }
+  .pcard { grid-template-columns: 80px 1fr; }
+  .early-grid { grid-template-columns: 1fr; }
+  .skills-cols { grid-template-columns: 1fr; }
+  .skills-cols-bottom { grid-template-columns: 1fr; }
+}
+@media (max-width: 600px) {
+  .topbar-nav { display: none; }
+  .topbar-nav.open {
+    display: flex; flex-direction: column; position: absolute;
+    top: 56px; left: 0; right: 0; background: var(--cream);
+    border-bottom: 1px solid rgba(26,22,18,0.08);
+    padding: 20px clamp(24px, 4vw, 60px); gap: 16px; box-shadow: var(--shadow-md);
+  }
+  .mobile-toggle { display: block; }
+  .pcard { grid-template-columns: 1fr; }
+  .pcard-side { padding: 20px; flex-direction: row; gap: 12px; }
+  .contact-band { padding: 36px 24px; }
+  .footer { flex-direction: column; gap: 8px; text-align: center; }
+}
+</style>
+</head>
+<body>
+
+<div class="topbar" id="topbar">
+  <div class="topbar-name" onclick="sTo('hero')">Reem Awad</div>
+  <button class="mobile-toggle" onclick="document.getElementById('mainNav').classList.toggle('open')">☰</button>
+  <ul class="topbar-nav" id="mainNav">
+    <li><a href="#about-sec" onclick="navGo('about-sec')">About</a></li>
+    <li><a href="#skills-sec" onclick="navGo('skills-sec')">Skills</a></li>
+    <li><a href="#projects-sec" onclick="navGo('projects-sec')">Projects</a></li>
+    <li><a href="#exp-sec" onclick="navGo('exp-sec')">Experience</a></li>
+    <li><a href="#comm-sec" onclick="navGo('comm-sec')">Additional</a></li>
+    <li><a href="#contact-sec" onclick="navGo('contact-sec')">Contact</a></li>
+  </ul>
+</div>
+
+<div class="page">
+
+<!-- Hero -->
+<section class="hero vis" id="hero">
+  <div class="hero-inner">
+    <p class="hero-overline">Computer Engineer · San Diego State University</p>
+    <div class="hero-main">
+      <h1 class="hero-title">Reem <span class="italic">Awad</span></h1>
+      <p class="hero-blurb">Computer Engineer specializing in software systems, embedded technologies, and AI-driven applications, with experience developing full-stack platforms, sensor-driven interfaces, and network simulation tools for real-time systems.</p>
+      <div class="hero-actions">
+        <a href="#projects-sec" class="btn-fill" onclick="sTo('projects-sec')">View Projects</a>
+        <a href="#contact-sec" class="btn-outline" onclick="sTo('contact-sec')">Contact Me</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- About -->
+<section id="about-sec">
+  <div class="sec-header">
+    <div class="sec-eyebrow">About</div>
+    <h2 class="sec-heading">Engineering Systems That Connect<br>the Physical and Digital World</h2>
+  </div>
+  <div class="about-content">
+    <p>I'm a Computer Engineer with a B.S. from San Diego State University who is passionate about using engineering to solve meaningful real-world problems. My work spans embedded systems, machine learning, and software development, with a focus on designing intelligent systems that connect hardware, data, and human interaction.</p>
+  </div>
+</section>
+
+<!-- Skills -->
+<section id="skills-sec">
+  <div class="sec-header">
+    <div class="sec-eyebrow">Technical Skills</div>
+    <h2 class="sec-heading">Languages, Frameworks & Systems</h2>
+  </div>
+  <div class="skills-section">
+    <div class="skills-marquee">
+      <div class="marquee-track">
+        <span class="marquee-item">C</span><span class="marquee-item">C++</span><span class="marquee-item">Python</span><span class="marquee-item">Verilog HDL</span><span class="marquee-item">MIPS Assembly</span><span class="marquee-item">SQL</span><span class="marquee-item">JavaScript</span><span class="marquee-item">HTML</span><span class="marquee-item">CSS</span><span class="marquee-item">React</span><span class="marquee-item">Three.js</span><span class="marquee-item">scikit-learn</span><span class="marquee-item">XGBoost</span><span class="marquee-item">Streamlit</span><span class="marquee-item">Hugging Face</span><span class="marquee-item">Git</span><span class="marquee-item">Linux</span><span class="marquee-item">MATLAB</span><span class="marquee-item">Xilinx Vivado</span><span class="marquee-item">SolidWorks</span>
+        <span class="marquee-item">C</span><span class="marquee-item">C++</span><span class="marquee-item">Python</span><span class="marquee-item">Verilog HDL</span><span class="marquee-item">MIPS Assembly</span><span class="marquee-item">SQL</span><span class="marquee-item">JavaScript</span><span class="marquee-item">HTML</span><span class="marquee-item">CSS</span><span class="marquee-item">React</span><span class="marquee-item">Three.js</span><span class="marquee-item">scikit-learn</span><span class="marquee-item">XGBoost</span><span class="marquee-item">Streamlit</span><span class="marquee-item">Hugging Face</span><span class="marquee-item">Git</span><span class="marquee-item">Linux</span><span class="marquee-item">MATLAB</span><span class="marquee-item">Xilinx Vivado</span><span class="marquee-item">SolidWorks</span>
+      </div>
+    </div>
+    <div class="skills-cols">
+      <div class="skill-block">
+        <div class="skill-block-num">01</div>
+        <h3>Programming Languages</h3>
+        <div class="skill-pills">
+          <span class="skill-pill">C</span><span class="skill-pill">C++</span><span class="skill-pill">Python</span><span class="skill-pill">Verilog HDL</span><span class="skill-pill">MIPS Assembly</span><span class="skill-pill">SQL</span><span class="skill-pill">JavaScript</span><span class="skill-pill">HTML</span><span class="skill-pill">CSS</span>
+        </div>
+      </div>
+      <div class="skill-block">
+        <div class="skill-block-num">02</div>
+        <h3>Software Engineering</h3>
+        <div class="skill-pills">
+          <span class="skill-pill">DSA</span><span class="skill-pill">OOP</span><span class="skill-pill">Real-Time Systems</span><span class="skill-pill">Signal Processing</span><span class="skill-pill">ML</span><span class="skill-pill">REST APIs</span><span class="skill-pill">NLP</span><span class="skill-pill">Networking</span><span class="skill-pill">Wireless Systems</span>
+        </div>
+      </div>
+      <div class="skill-block">
+        <div class="skill-block-num">03</div>
+        <h3>Embedded Systems & Hardware</h3>
+        <div class="skill-pills">
+          <span class="skill-pill">Microcontrollers</span><span class="skill-pill">Embedded Dev</span><span class="skill-pill">Digital Logic</span><span class="skill-pill">Circuit Analysis</span><span class="skill-pill">Sensor Integration</span><span class="skill-pill">BLE Communication</span>
+        </div>
+      </div>
+    </div>
+    <div class="skills-cols-bottom">
+      <div class="skill-block">
+        <div class="skill-block-num">04</div>
+        <h3>Frameworks & Libraries</h3>
+        <div class="skill-pills">
+          <span class="skill-pill">React</span><span class="skill-pill">Three.js</span><span class="skill-pill">scikit-learn</span><span class="skill-pill">XGBoost</span><span class="skill-pill">Streamlit</span><span class="skill-pill">Hugging Face</span>
+        </div>
+      </div>
+      <div class="skill-block">
+        <div class="skill-block-num">05</div>
+        <h3>Developer Tools</h3>
+        <div class="skill-pills">
+          <span class="skill-pill">Git</span><span class="skill-pill">GitHub</span><span class="skill-pill">Linux</span><span class="skill-pill">Xilinx Vivado</span><span class="skill-pill">MATLAB</span><span class="skill-pill">SolidWorks</span><span class="skill-pill">Eclipse</span><span class="skill-pill">Visual Studio</span><span class="skill-pill">PuTTY</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Projects -->
+<section id="projects-sec">
+  <div class="sec-header">
+    <div class="sec-eyebrow">Projects</div>
+    <h2 class="sec-heading">What I've Built</h2>
+  </div>
+  <div class="projects-section">
+    <div class="project-grid">
+
+      <div class="pcard" id="p1">
+        <div class="pcard-side"><div class="pcard-num">01</div></div>
+        <div class="pcard-body">
+          <div class="pcard-title">EngineeRing – Real-Time BLE Gesture-Control Ring</div>
+          <div class="pcard-role">Software Lead</div>
+          <ul class="pcard-bullets">
+            <li>Wearable smart ring enabling cursor navigation and gesture-based input via mid-air hand movements</li>
+            <li>Integrates IMU motion sensing with BLE for real-time computer interaction</li>
+            <li>Designed for rehabilitation — motion tracking for motor recovery and physical therapy</li>
+            <li>Python-based control software with sensor fusion, motion smoothing, and jitter reduction</li>
+            <li>Supports pointer navigation, gesture typing, presentation control, and rehab tracking</li>
+          </ul>
+          <div class="pcard-links">
+            <a href="https://www.youtube.com/watch?v=fwYdecRUMGU&feature=youtu.be" class="pcard-link" target="_blank" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg> EngineeRing Demo</a>
+          </div>
+          <div class="pcard-tech">
+            <span>Python</span><span>BLE Communication</span><span>IMU Sensor Fusion</span><span>Real-Time Input Processing</span><span>Desktop UI Development</span>
+          </div>
+          <div class="pcard-expand-content">
+            <div class="pcard-expand-inner">
+              <p>EngineeRing is a wearable smart ring designed to enable intuitive cursor navigation and gesture-based input through mid-air hand movements. The system integrates IMU motion sensing with Bluetooth Low Energy communication to translate gestures into real-time computer interactions. In addition to general computer interaction, the system was designed with rehabilitation applications in mind, allowing motion tracking and gesture-based exercises that can support motor recovery and physical therapy.</p>
+              <p>As the Software Lead, I developed the Python-based control software responsible for gesture interpretation and system responsiveness. I implemented sensor fusion techniques to process IMU data and designed algorithms to smooth motion input, reduce jitter, and improve interaction precision. The system supports multiple interaction modes, allowing users to switch dynamically between pointer navigation, gesture typing, presentation control, and rehabilitation-focused motion tracking to illustrate the ring's potential across assistive technology, productivity, and everyday human–computer interaction scenarios.</p>
+            </div>
+          </div>
+          <button class="toggle-btn" onclick="toggleP(event, 'p1')">Read full description <span class="arrow">↓</span></button>
+        </div>
+      </div>
+
+      <div class="pcard" id="p2">
+        <div class="pcard-side"><div class="pcard-num">02</div></div>
+        <div class="pcard-body">
+          <div class="pcard-title">Drone Network Simulator</div>
+          <div class="pcard-role">Communication Systems · UAV Networks</div>
+          <ul class="pcard-bullets">
+            <li>Simulation environment for UAV network communication with up to 100 drones</li>
+            <li>Models physical, MAC, and routing layers under varying mobility and interference</li>
+            <li>Implemented path loss, RSSI/SNR estimation, interference modeling, and packet loss</li>
+            <li>Evaluates scalability, packet delivery, latency, and energy–throughput tradeoffs</li>
+            <li>Web-based real-time visualization of node movement and network metrics</li>
+          </ul>
+          <div class="pcard-links">
+            <a href="https://docs.google.com/document/d/1BaSRCnKN8jP15wHMKBepi_PbGoTGyQJcdEy_KFJsRX4/edit?usp=sharing" class="pcard-link" target="_blank" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg> User Manual & Download Guide</a>
+          </div>
+          <div class="pcard-tech">
+            <span>Python</span><span>Wireless Network Modeling</span><span>CSMA/CA</span><span>OLSR Routing</span><span>Network Simulation</span>
+          </div>
+          <div class="pcard-expand-content">
+            <div class="pcard-expand-inner">
+              <p>This project involved building a simulation environment to analyze communication performance in unmanned aerial vehicle (UAV) networks. The simulator models the physical, MAC, and routing layers of wireless communication to study how drone networks behave under varying mobility and interference conditions.</p>
+              <p>I contributed to the development of the physical-layer communication model, implementing log-distance path loss calculations, RSSI/SNR estimation, interference modeling, and distance-based packet loss. These models allowed the simulator to replicate realistic wireless communication behavior between drones.</p>
+              <p>The simulator supports experiments with up to 100 UAVs, enabling analysis of network scalability, packet delivery ratio, latency, and energy–throughput tradeoffs. The project was used to evaluate how routing protocols and channel conditions affect network reliability.</p>
+              <p>To showcase the system, we also developed a web-based interface that visualizes the simulated drone network in real time, allowing users to observe node movement, communication links, and network performance metrics during simulations. The interface provides an interactive way to explore how network behavior changes under different mobility patterns, interference levels, and routing configurations.</p>
+            </div>
+          </div>
+          <button class="toggle-btn" onclick="toggleP(event, 'p2')">Read full description <span class="arrow">↓</span></button>
+        </div>
+      </div>
+
+      <div class="pcard" id="p3">
+        <div class="pcard-side"><div class="pcard-num">03</div></div>
+        <div class="pcard-body">
+          <div class="pcard-title">Predicting Medical Insurance Costs with Machine Learning</div>
+          <div class="pcard-role">Machine Learning · Regression Pipeline</div>
+          <ul class="pcard-bullets">
+            <li>End-to-end ML pipeline predicting insurance costs from demographic and health features</li>
+            <li>Tested three regression models — XGBoost achieved best results with R² ≈ 0.86</li>
+            <li>Full pipeline: data preprocessing, feature engineering, cross-validation, evaluation</li>
+            <li>Deployed via Streamlit for real-time interactive cost predictions</li>
+          </ul>
+          <div class="pcard-links">
+            <a href="https://drive.google.com/file/d/1OBQNgwLiRIk7V8-hD-_pUAZGlSLgfH-K/view" class="pcard-link" target="_blank" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg> 510 Video Demo</a>
+          </div>
+          <div class="pcard-tech">
+            <span>Python</span><span>scikit-learn</span><span>XGBoost</span><span>Machine Learning</span><span>Streamlit</span>
+          </div>
+          <div class="pcard-expand-content">
+            <div class="pcard-expand-inner">
+              <p>This project focused on developing a machine learning system to predict individual medical insurance costs based on demographic and health-related features.</p>
+              <p>I built an end-to-end regression pipeline that included data preprocessing, feature engineering, cross-validation, and model evaluation. To determine the most effective predictive approach, I implemented and tested three different regression models, comparing their performance using standard evaluation metrics. Through this experimentation process, ensemble methods such as XGBoost produced the best results, achieving an R² score of approximately 0.86.</p>
+              <p>After identifying the most accurate model, I deployed the solution using Streamlit, a Python framework for building web-based interactive applications. The Streamlit interface allows users to input personal health and demographic information and receive real-time insurance cost predictions, providing an accessible way to demonstrate the model's functionality and performance.</p>
+            </div>
+          </div>
+          <button class="toggle-btn" onclick="toggleP(event, 'p3')">Read full description <span class="arrow">↓</span></button>
+        </div>
+      </div>
+
+      <div class="pcard" id="p4">
+        <div class="pcard-side"><div class="pcard-num">04</div></div>
+        <div class="pcard-body">
+          <div class="pcard-title">AI Doctor Web Application</div>
+          <div class="pcard-role">Full-Stack Development · Team Project</div>
+          <ul class="pcard-bullets">
+            <li>Full-stack AI medical consultation platform with React frontend and FastAPI backend</li>
+            <li>Implemented core features, user authentication, and session-based interactions</li>
+            <li>Designed structured data models for secure handling and scalable architecture</li>
+            <li>Demonstrates conversational AI integrated into digital healthcare tools</li>
+          </ul>
+          <div class="pcard-links">
+            <a href="https://ai-doctor-compe-561.vercel.app/" class="pcard-link" target="_blank" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg> Live Site</a>
+            <a href="https://github.com/tribui1912/AIDoctor-COMPE561" class="pcard-link" target="_blank" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg> GitHub</a>
+          </div>
+          <div class="pcard-tech">
+            <span>FastAPI</span><span>React</span><span>REST APIs</span><span>Full-Stack Web Development</span>
+          </div>
+          <div class="pcard-expand-content">
+            <div class="pcard-expand-inner">
+              <p>This project involved building a full-stack web application designed to simulate an AI-driven medical consultation platform.</p>
+              <p>Working collaboratively with a development team, I contributed to both the frontend and backend development, helping build a React-based user interface and supporting backend functionality using FastAPI. My work focused on implementing core application features, integrating front-end components with backend services, and supporting user authentication and session-based interactions.</p>
+              <p>I also assisted with designing structured data models and organizing backend components to support secure data handling and scalable system architecture. More advanced API architecture and integration were developed by other members of the team, while I focused on ensuring smooth interaction between the user interface and backend services.</p>
+              <p>The platform demonstrates how conversational AI and modern web technologies can be integrated into digital healthcare tools.</p>
+            </div>
+          </div>
+          <button class="toggle-btn" onclick="toggleP(event, 'p4')">Read full description <span class="arrow">↓</span></button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- Professional Experience -->
+<section id="exp-sec">
+  <div class="sec-header">
+    <div class="sec-eyebrow">Professional Experience</div>
+    <h2 class="sec-heading">Where I've Worked</h2>
+  </div>
+  <div class="exp-section">
+    <div class="exp-list">
+
+      <div class="exp-item" id="e1">
+        <div class="exp-meta">
+          <div class="exp-date">Nov 2024 – Present</div>
+          <div class="exp-loc">San Diego, CA</div>
+        </div>
+        <div class="exp-content">
+          <h3>IT Intern</h3>
+          <div class="exp-company">City of San Diego — IT Department, Equity Division</div>
+          <ul class="exp-bullets">
+            <li>Troubleshoot hardware, OS, network, and application-level issues across public-sector environments</li>
+            <li>Assist residents with navigating online government services and building digital confidence</li>
+            <li>Support secure system configuration and access management aligned with IT governance standards</li>
+            <li>Contribute to documentation and process improvements for long-term system maintainability</li>
+          </ul>
+          <div class="exp-expand">
+            <div class="exp-expand-inner">
+              <p>At the City of San Diego's IT Department, I support community members and city programs by improving access to technology and digital services. My work focuses on strengthening digital accessibility, resolving technical issues, and helping ensure that residents can effectively use the technology resources and platforms provided by the city.</p>
+              <p>I troubleshoot hardware, operating system, network, and application-level issues across public-sector environments, helping reduce downtime and maintain reliable system performance. By diagnosing recurring technical problems and identifying root causes, I contribute to improvements in system usability and operational workflows across city-supported digital platforms.</p>
+              <p>As part of the initiative, I also assist residents with navigating online government services, accessing digital resources, and building confidence in using essential technologies. This includes helping individuals connect to public programs, complete digital forms, and utilize city platforms that support education, employment, and community services.</p>
+              <p>In addition, I support secure system configuration and access management practices across city-managed platforms, helping ensure alignment with IT governance and security standards. I also track technical issues and contribute to documentation and process improvements that strengthen long-term system maintainability and improve response times for support requests.</p>
+            </div>
+          </div>
+          <button class="toggle-btn" onclick="toggleE(event, 'e1')">Read full description <span class="arrow">↓</span></button>
+        </div>
+      </div>
+
+      <div class="exp-item" id="e2">
+        <div class="exp-meta">
+          <div class="exp-date">May – Aug 2024</div>
+          <div class="exp-loc">San Diego, CA</div>
+        </div>
+        <div class="exp-content">
+          <h3>Software Engineering Intern — AI/ML</h3>
+          <div class="exp-company">Practical Solutions, Inc.</div>
+          <ul class="exp-bullets">
+            <li>Fine-tuned transformer-based models via Hugging Face, improving performance 5–15% on benchmarks</li>
+            <li>Conducted hyperparameter tuning and model evaluation to reduce overfitting</li>
+            <li>Performed regression testing, defect tracking, and fix validation across applications</li>
+            <li>Collaborated in a 12-member Agile team with sprint planning and iterative development</li>
+          </ul>
+          <div class="exp-expand">
+            <div class="exp-expand-inner">
+              <p>During my internship at Practical Solutions, Inc., I worked on machine learning and natural language processing projects within a collaborative engineering team. My work focused on improving the performance and reliability of NLP models through experimentation, evaluation, and optimization.</p>
+              <p>I fine-tuned transformer-based pretrained language models using the Hugging Face framework, improving model performance by 5–15% on task-specific benchmarks. I also conducted model evaluation using specialized performance metrics and hyperparameter tuning to reduce overfitting and improve prediction consistency.</p>
+              <p>Beyond model development, I supported software quality and deployment stability by conducting regression testing, tracking software defects, and validating fixes across applications. Working within a 12-member Agile engineering team, I participated in stand-ups, sprint planning, and iterative development cycles to support continuous model improvement.</p>
+            </div>
+          </div>
+          <button class="toggle-btn" onclick="toggleE(event, 'e2')">Read full description <span class="arrow">↓</span></button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- Additional Work & Experience -->
+<section id="comm-sec">
+  <div class="sec-header">
+    <div class="sec-eyebrow">Additional Work & Experience</div>
+    <h2 class="sec-heading">Volunteering, Mentorship & More</h2>
+  </div>
+  <div class="community-section">
+    <div class="community-strip">
+
+      <div class="com-card" id="c1">
+        <h4>Robotics Mentorship – Botball Competition</h4>
+        <ul class="com-bullets">
+          <li>Coached student teams in autonomous robot design, programming, and strategy</li>
+          <li>Taught programming concepts using C, C++, and Java</li>
+          <li>Multiple teams achieved award-winning performance</li>
+        </ul>
+        <div class="com-expand">
+          <div class="com-expand-inner">
+            Coached and mentored student teams participating in the KISS Institute for Practical Robotics Botball competition, guiding them in the design, programming, and strategy of autonomous robots. Supported teams in developing problem-solving skills while teaching programming concepts using C, C++, and Java. Several teams achieved award-winning performance through strategic engineering design and algorithm development.
+          </div>
+        </div>
+        <button class="toggle-btn" onclick="toggleC(event, 'c1')">Read more <span class="arrow">↓</span></button>
+      </div>
+
+      <div class="com-card" id="c2">
+        <h4>Computers 2 Kids – Technology Access Volunteer</h4>
+        <ul class="com-bullets">
+          <li>Refurbished donated computers for students in underserved communities</li>
+          <li>Assisted with community distribution events and e-waste recycling</li>
+          <li>Expanded digital access for families without reliable technology</li>
+        </ul>
+        <div class="com-expand">
+          <div class="com-expand-inner">
+            Volunteered with Computers 2 Kids, helping refurbish donated computers and prepare them for distribution to students in underserved communities. Assisted with community distribution events and electronic waste recycling efforts aimed at expanding digital access for families without reliable technology resources.
+          </div>
+        </div>
+        <button class="toggle-btn" onclick="toggleC(event, 'c2')">Read more <span class="arrow">↓</span></button>
+      </div>
+
+      <div class="com-card" id="c3">
+        <h4>Website Development – Harbor Way Airport Transportation</h4>
+        <ul class="com-bullets">
+          <li>Built front-end interface for an airport transportation company</li>
+          <li>Focused on clean, accessible design for customer inquiries</li>
+        </ul>
+        <a href="https://harborlimo.com/" class="com-card-link" target="_blank">harborlimo.com ↗</a>
+        <div class="com-expand">
+          <div class="com-expand-inner">
+            Contributed to the development of a website for Harbor Way Airport Transportation, assisting with front-end design. The project involved building a clean and accessible web interface to support customer inquiries and improve the company's online presence.
+          </div>
+        </div>
+        <button class="toggle-btn" onclick="toggleC(event, 'c3')">Read more <span class="arrow">↓</span></button>
+      </div>
+
+      <div class="com-card" id="c4">
+        <h4>STEM Education & Tutoring</h4>
+        <ul class="com-bullets">
+          <li>Tutored middle school students in math and science after school</li>
+          <li>Collaborated with teaching staff to encourage academic growth in STEM</li>
+        </ul>
+        <div class="com-expand">
+          <div class="com-expand-inner">
+            Supported middle school students through the Standley Middle School After-School Homework Club, helping them strengthen their understanding of math and science coursework. Worked collaboratively with teaching staff to encourage academic growth and build confidence in STEM subjects.
+          </div>
+        </div>
+        <button class="toggle-btn" onclick="toggleC(event, 'c4')">Read more <span class="arrow">↓</span></button>
+      </div>
+
+    </div>
+
+    <div class="early-projects">
+      <h3>Early Technical Projects</h3>
+      <p>In earlier coursework and personal development projects, I explored systems programming, computer architecture, and embedded systems through hands-on development.</p>
+      <div class="early-grid">
+        <div class="early-card" id="ep1">
+          <h4>Mathio – Educational Game</h4>
+          <ul class="early-bullets">
+            <li>Grid-based educational game in C for binary, floating-point, and matrix practice</li>
+            <li>Reimplemented in MIPS Assembly for low-level graphics exploration</li>
+          </ul>
+          <div class="early-expand">
+            <div class="early-expand-inner">
+              Developed a grid-based educational game in C that helps players practice binary conversion, floating-point operations, and matrix calculations. Later reimplemented the project in MIPS Assembly to explore low-level graphics and memory-mapped input/output using the MARS simulator.
+            </div>
+          </div>
+          <button class="toggle-btn" onclick="toggleEP(event, 'ep1')">Read more <span class="arrow">↓</span></button>
+        </div>
+        <div class="early-card" id="ep2">
+          <h4>FPGA Digital Alarm Clock</h4>
+          <ul class="early-bullets">
+            <li>Digital alarm clock on FPGA with hardware logic and timing circuits</li>
+            <li>Integrated user interface controls for real-time clock functionality</li>
+          </ul>
+          <div class="early-expand">
+            <div class="early-expand-inner">
+              Designed and implemented a digital alarm clock using FPGA-based embedded systems, integrating hardware logic, timing circuits, and user interface controls to manage real-time clock functionality.
+            </div>
+          </div>
+          <button class="toggle-btn" onclick="toggleEP(event, 'ep2')">Read more <span class="arrow">↓</span></button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Contact -->
+<section id="contact-sec">
+  <div class="contact-section">
+    <div class="contact-band">
+      <div class="contact-left">
+        <h2>Let's build<br>something together.</h2>
+        <p>I'm always interested in discussing new opportunities, collaborations, and innovative technology projects. Feel free to reach out if you'd like to connect or learn more about my work.</p>
+      </div>
+      <div class="contact-links">
+        <a href="mailto:Reem.Alzouby@gmail.com" class="contact-row">
+          <div class="contact-row-icon">✉</div>
+          <div class="contact-row-text"><span>Email</span><strong>Reem.Alzouby@gmail.com</strong></div>
+        </a>
+        <a href="tel:+18589006540" class="contact-row">
+          <div class="contact-row-icon">☎</div>
+          <div class="contact-row-text"><span>Phone</span><strong>(858) 900-6540</strong></div>
+        </a>
+        <a href="https://linkedin.com/in/reem-awadd" target="_blank" class="contact-row">
+          <div class="contact-row-icon">in</div>
+          <div class="contact-row-text"><span>LinkedIn</span><strong>linkedin.com/in/reem-awadd</strong></div>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="footer">
+  <span>Reem Awad · Computer Engineer</span>
+  <span>San Diego, California</span>
+</div>
+
+</div>
+
+<script>
+const secs = document.querySelectorAll('section:not(.hero)');
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('vis'); });
+}, { threshold: 0.08 });
+secs.forEach(s => io.observe(s));
+
+window.addEventListener('scroll', () => {
+  document.getElementById('topbar').classList.toggle('scrolled', window.scrollY > 40);
+});
+
+const navLinks = document.querySelectorAll('.topbar-nav a');
+const navIO = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      const id = e.target.id;
+      navLinks.forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#' + id));
+    }
+  });
+}, { threshold: 0.25 });
+document.querySelectorAll('section[id]').forEach(s => navIO.observe(s));
+
+function updateLabel(btn, isOpen, long) {
+  if (!btn) return;
+  const txt = long
+    ? (isOpen ? 'Show less ' : 'Read full description ')
+    : (isOpen ? 'Read less ' : 'Read more ');
+  // preserve the arrow span
+  const arrow = btn.querySelector('.arrow');
+  btn.textContent = '';
+  btn.appendChild(document.createTextNode(txt));
+  if (arrow) btn.appendChild(arrow);
+}
+
+function toggleP(e, id) {
+  e.stopPropagation();
+  const card = document.getElementById(id);
+  const wasOpen = card.classList.contains('open');
+  document.querySelectorAll('.pcard.open').forEach(c => {
+    c.classList.remove('open');
+    updateLabel(c.querySelector('.toggle-btn'), false, true);
+  });
+  if (!wasOpen) card.classList.add('open');
+  updateLabel(card.querySelector('.toggle-btn'), !wasOpen, true);
+}
+
+function toggleE(e, id) {
+  e.stopPropagation();
+  const item = document.getElementById(id);
+  const wasOpen = item.classList.contains('open');
+  document.querySelectorAll('.exp-item.open').forEach(c => {
+    c.classList.remove('open');
+    updateLabel(c.querySelector('.toggle-btn'), false, true);
+  });
+  if (!wasOpen) item.classList.add('open');
+  updateLabel(item.querySelector('.toggle-btn'), !wasOpen, true);
+}
+
+function toggleC(e, id) {
+  e.stopPropagation();
+  const card = document.getElementById(id);
+  card.classList.toggle('open');
+  updateLabel(card.querySelector('.toggle-btn'), card.classList.contains('open'), false);
+}
+
+function toggleEP(e, id) {
+  e.stopPropagation();
+  const card = document.getElementById(id);
+  card.classList.toggle('open');
+  updateLabel(card.querySelector('.toggle-btn'), card.classList.contains('open'), false);
+}
+
+function sTo(id) { document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' }); }
+function navGo(id) { document.getElementById('mainNav').classList.remove('open'); sTo(id); }
+</script>
+
+</body>
+</html>
