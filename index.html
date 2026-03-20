@@ -225,6 +225,160 @@ section.vis { opacity: 1; transform: none; }
 }
 .skill-block:hover .skill-pill { border-color: var(--rust-border); color: var(--rust); }
 
+/* ── Soft Skills Grid ── */
+.soft-skills-grid {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 0;
+}
+
+/* Card base */
+.ss-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    background: var(--warm-white);
+    border: 1px solid rgba(26, 22, 18, 0.06);
+    border-radius: var(--radius);
+    padding: 28px 26px 24px;
+    opacity: 0;
+    transform: translateY(18px);
+    transition:
+        opacity 0.55s var(--ease),
+        transform 0.55s var(--ease),
+        box-shadow 0.28s var(--ease),
+        border-color 0.28s var(--ease);
+    will-change: transform, box-shadow;
+    overflow: hidden;
+}
+
+.ss-card.ss-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.ss-card:hover {
+    box-shadow: var(--shadow-md);
+    transform: translateY(-4px);
+    border-color: var(--rust-border);
+}
+
+.ss-card.ss-visible:hover {
+    transform: translateY(-4px);
+}
+
+/* Icon */
+.ss-card__icon {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin-bottom: 16px;
+    color: var(--rust);
+    opacity: 0.75;
+    transition: opacity 0.25s var(--ease);
+}
+
+.ss-card__icon svg {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+}
+
+.ss-card:hover .ss-card__icon {
+    opacity: 1;
+}
+
+/* Body */
+.ss-card__body {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+/* Title */
+.ss-card__title {
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+    margin-bottom: 8px;
+    line-height: 1.3;
+}
+
+/* Description */
+.ss-card__desc {
+    font-size: 13px;
+    line-height: 1.65;
+    color: var(--ink-muted);
+    margin: 0;
+    flex: 1;
+    transition: color 0.2s var(--ease);
+}
+
+.ss-card:hover .ss-card__desc {
+    color: var(--ink-light);
+}
+
+/* Proof-on-hover */
+.ss-card__proof {
+    display: block;
+    font-size: 11.5px;
+    font-style: italic;
+    line-height: 1.55;
+    color: var(--rust);
+    opacity: 0;
+    transform: translateY(6px);
+    margin-top: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition:
+        opacity 0.3s var(--ease),
+        transform 0.3s var(--ease),
+        max-height 0.35s var(--ease),
+        margin-top 0.3s var(--ease);
+    pointer-events: none;
+}
+
+.ss-card__proof::before {
+    content: '';
+    display: block;
+    width: 24px;
+    height: 1px;
+    background: var(--rust-border);
+    margin-bottom: 8px;
+    margin-top: 2px;
+}
+
+.ss-card:hover .ss-card__proof {
+    opacity: 0.85;
+    transform: translateY(0);
+    max-height: 80px;
+    margin-top: 12px;
+    pointer-events: auto;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+    .soft-skills-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 540px) {
+    .soft-skills-grid { grid-template-columns: 1fr; gap: 14px; }
+    .ss-card { padding: 22px 20px 18px; }
+    .ss-card__title { font-size: 13.5px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ss-card { opacity: 1; transform: none; transition: box-shadow 0.2s, border-color 0.2s; }
+    .ss-card:hover { transform: none; }
+    .ss-card__proof { transition: opacity 0.15s, max-height 0.15s, margin-top 0.15s; }
+}
+
 /* ── Projects ── */
 .projects-section { padding: 0 clamp(24px, 4vw, 60px) 100px; }
 .project-grid { display: grid; gap: 32px; }
@@ -666,6 +820,123 @@ section.vis { opacity: 1; transform: none; }
 </section>
 
 <!-- Projects -->
+<section id="soft-skills-sec">
+    <div class="sec-header">
+        <div class="sec-eyebrow">Soft Skills</div>
+        <h2 class="sec-heading">People &amp; Professional Skills</h2>
+    </div>
+
+    <div class="skills-section">
+        <ul class="soft-skills-grid" role="list" aria-label="Soft skills and professional qualities">
+
+            <li class="ss-card">
+                <div class="ss-card__icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                    </svg>
+                </div>
+                <div class="ss-card__body">
+                    <h3 class="ss-card__title">Leadership &amp; Team Collaboration</h3>
+                    <p class="ss-card__desc">Led software development for a multi-functional smart ring project and contributed to cross-functional engineering teams.</p>
+                    <span class="ss-card__proof" aria-label="Proof example">Software Lead on EngineeRing: coordinated firmware, BLE, and UI across a cross-functional team.</span>
+                </div>
+            </li>
+
+            <li class="ss-card">
+                <div class="ss-card__icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                    </svg>
+                </div>
+                <div class="ss-card__body">
+                    <h3 class="ss-card__title">Communication</h3>
+                    <p class="ss-card__desc">Effectively explain technical concepts to both technical and non-technical audiences, including community members and students.</p>
+                    <span class="ss-card__proof" aria-label="Proof example">Presented ML insurance-cost pipeline to non-technical stakeholders; translated results into plain English.</span>
+                </div>
+            </li>
+
+            <li class="ss-card">
+                <div class="ss-card__icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/>
+                    </svg>
+                </div>
+                <div class="ss-card__body">
+                    <h3 class="ss-card__title">Problem-Solving &amp; Critical Thinking</h3>
+                    <p class="ss-card__desc">Diagnose complex system issues, optimize performance, and develop practical solutions under real-world constraints.</p>
+                    <span class="ss-card__proof" aria-label="Proof example">Diagnosed and resolved BLE packet-loss issues under real-time constraints in the EngineeRing project.</span>
+                </div>
+            </li>
+
+            <li class="ss-card">
+                <div class="ss-card__icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/>
+                    </svg>
+                </div>
+                <div class="ss-card__body">
+                    <h3 class="ss-card__title">Adaptability</h3>
+                    <p class="ss-card__desc">Thrive in fast-paced environments, balancing multiple projects across AI, embedded systems, and web development.</p>
+                    <span class="ss-card__proof" aria-label="Proof example">Shifted between AI/ML, embedded systems, and full-stack web dev across a single semester.</span>
+                </div>
+            </li>
+
+            <li class="ss-card">
+                <div class="ss-card__icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>
+                    </svg>
+                </div>
+                <div class="ss-card__body">
+                    <h3 class="ss-card__title">User-Centered Thinking</h3>
+                    <p class="ss-card__desc">Design systems with a focus on usability, accessibility, and real-world impact.</p>
+                    <span class="ss-card__proof" aria-label="Proof example">Prioritised gesture latency &amp; jitter reduction in EngineeRing so the ring felt natural for rehab patients.</span>
+                </div>
+            </li>
+
+            <li class="ss-card">
+                <div class="ss-card__icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/>
+                    </svg>
+                </div>
+                <div class="ss-card__body">
+                    <h3 class="ss-card__title">Mentorship &amp; Teaching</h3>
+                    <p class="ss-card__desc">Guided students in robotics and STEM, fostering problem-solving and technical confidence.</p>
+                    <span class="ss-card__proof" aria-label="Proof example">Coached Botball robotics teams — multiple teams achieved award-winning performance.</span>
+                </div>
+            </li>
+
+            <li class="ss-card">
+                <div class="ss-card__icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                    </svg>
+                </div>
+                <div class="ss-card__body">
+                    <h3 class="ss-card__title">Attention to Detail</h3>
+                    <p class="ss-card__desc">Maintain high-quality code, testing processes, and system reliability across projects.</p>
+                    <span class="ss-card__proof" aria-label="Proof example">Implemented sensor-fusion smoothing &amp; jitter filters in EngineeRing for consistent cursor tracking.</span>
+                </div>
+            </li>
+
+            <li class="ss-card">
+                <div class="ss-card__icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+                    </svg>
+                </div>
+                <div class="ss-card__body">
+                    <h3 class="ss-card__title">Initiative &amp; Ownership</h3>
+                    <p class="ss-card__desc">Take responsibility for key system components and drive projects forward independently.</p>
+                    <span class="ss-card__proof" aria-label="Proof example">Self-initiated the drone network simulator — scoped, built, and delivered the physical-layer model independently.</span>
+                </div>
+            </li>
+
+        </ul>
+    </div>
+</section>
+
 <section id="projects-sec">
   <div class="sec-header">
     <div class="sec-eyebrow">Projects</div>
@@ -1070,6 +1341,30 @@ function toggleEP(e, id) {
 
 function sTo(id) { document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' }); }
 function navGo(id) { document.getElementById('mainNav').classList.remove('open'); sTo(id); }
+
+// ── Soft Skills card stagger reveal ──────────────────────────────────────────
+(function () {
+    var cards = document.querySelectorAll('.ss-card');
+    if (!cards.length) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        cards.forEach(function (c) { c.classList.add('ss-visible'); });
+        return;
+    }
+    var cardObserver = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+                var card = entry.target;
+                var delay = parseInt(card.dataset.ssIndex, 10) * 70;
+                setTimeout(function () { card.classList.add('ss-visible'); }, delay);
+                cardObserver.unobserve(card);
+            }
+        });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+    cards.forEach(function (card, i) {
+        card.dataset.ssIndex = i;
+        cardObserver.observe(card);
+    });
+})();
 </script>
 
 </body>
