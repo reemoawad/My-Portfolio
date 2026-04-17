@@ -964,12 +964,12 @@ section.vis { opacity: 1; transform: none; }
           <div class="pcard-title">EngineeRing – Real-Time BLE Gesture-Control Ring</div>
           <div class="pcard-role">Software Lead</div>
           <ul class="pcard-bullets">
-            <li>Wearable smart ring enabling cursor navigation and gesture-based input via mid-air hand movements</li>
-            <li>Integrates IMU motion sensing with BLE for real-time computer interaction</li>
-            <li>Designed for rehabilitation — motion tracking for motor recovery and physical therapy</li>
-            <li>Python-based control software with sensor fusion, motion smoothing, and jitter reduction</li>
-            <li>Supports pointer navigation, gesture typing, presentation control, and rehab tracking</li>
-          </ul>
+            <li>Custom-built wearable ring with 6-axis IMU (accelerometer + gyroscope) streaming 14-byte BLE packets at ~100 Hz</li>
+            <li>Python host processes raw IMU data: gravity removal → low-pass filter (α=0.18) → tilt-to-velocity mapping → gesture FSM</li>
+            <li>16 distinct gestures across 3 operating modes (Regular, Typing, Presentation) — mode auto-detected via active window context</li>
+            <li>Passively records rehabilitation metrics each session: range of motion, angular velocity, smoothness, jitter &amp; fatigue indices</li>
+            <li>Outputs JSON session report + ROM vs. Time graph; designed for accessibility and post-injury physiotherapy use</li>
+          </ul
           <div class="pcard-links">
             <a href="https://www.youtube.com/watch?v=fwYdecRUMGU&feature=youtu.be" class="pcard-link" target="_blank" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg> EngineeRing Demo</a><a href="https://github.com/reemoawad/EngineeRing" class="pcard-link" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg> GitHub</a><a href="EngineeRing-User-Manual.pdf" class="pcard-link" target="_blank"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg> User Manual</a><a href="Senior-Design-Poster.pdf" class="pcard-link" target="_blank"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg> Senior Design Poster</a>
           </div>
@@ -978,8 +978,8 @@ section.vis { opacity: 1; transform: none; }
           </div>
           <div class="pcard-expand-content">
             <div class="pcard-expand-inner">
-              <p>EngineeRing is a wearable smart ring designed to enable intuitive cursor navigation and gesture-based input through mid-air hand movements. The system integrates IMU motion sensing with Bluetooth Low Energy communication to translate gestures into real-time computer interactions. In addition to general computer interaction, the system was designed with rehabilitation applications in mind, allowing motion tracking and gesture-based exercises that can support motor recovery and physical therapy.</p>
-              <p>As the Software Lead, I developed the Python-based control software responsible for gesture interpretation and system responsiveness. I implemented sensor fusion techniques to process IMU data and designed algorithms to smooth motion input, reduce jitter, and improve interaction precision. The system supports multiple interaction modes, allowing users to switch dynamically between pointer navigation, gesture typing, presentation control, and rehabilitation-focused motion tracking to illustrate the ring's potential across assistive technology, productivity, and everyday human–computer interaction scenarios.</p>
+              <p>EngineeRing is a custom-built wearable smart ring that translates wrist gestures into real-time computer control. The hardware consists of a 6-axis IMU (3-axis accelerometer + 3-axis gyroscope) and two buttons, transmitting 14-byte BLE packets at ~100 Hz over the Nordic UART Service (NUS) protocol. A Python host application receives the data, applies gravity bias removal and a low-pass exponential filter, maps the filtered tilt vector to cursor velocity, and dispatches OS-level input events via pyautogui — all with sub-frame latency. The system was designed with two real-world applications in mind: hands-free computer accessibility for users with motor impairments, and quantitative rehabilitation monitoring for wrist recovery and physical therapy.</p>
+              <p>As Software Lead, I designed and built the entire Python software system end-to-end. The signal processing pipeline runs at ~100 Hz: raw IMU bytes are decoded from BLE packets, a calibration baseline removes the gravity vector, an exponential moving average (α = 0.18) smooths the signal, and a dead-zone gate (0.04 rad) prevents cursor drift from micro-tremors. A finite state machine evaluates button timing windows to classify 16 distinct gestures across three operating modes — Regular, Typing, and Presentation — with the active mode determined automatically by checking the foreground application via AppleScript (macOS) or pygetwindow (Windows).</p>
             </div>
           </div>
           <button class="toggle-btn" onclick="toggleP(event, 'p1')">Read full description <span class="arrow">↓</span></button>
