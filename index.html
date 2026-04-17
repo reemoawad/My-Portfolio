@@ -472,6 +472,16 @@ section.vis { opacity: 1; transform: none; }
 .pcard-expand-inner p { margin-bottom: 12px; }
 .pcard-expand-inner p:last-child { margin-bottom: 0; }
 
+/* ── Project Diagram ── */
+.pcard-diagram { margin-top: 20px; }
+.diagram-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink-muted); margin-bottom: 10px !important; }
+.diagram-flow { display: flex; align-items: stretch; flex-wrap: wrap; gap: 4px; }
+.diagram-block { background: var(--warm-white); border: 1px solid var(--rust-border); border-radius: 6px; padding: 8px 10px; display: flex; flex-direction: column; gap: 2px; min-width: 90px; }
+.block-title { font-size: 11px; font-weight: 700; color: var(--ink); }
+.block-detail { font-size: 10px; color: var(--ink-muted); line-height: 1.3; }
+.diagram-arrow { display: flex; align-items: center; color: var(--rust); font-size: 14px; font-weight: 600; padding: 0 2px; }
+@media (max-width: 600px) { .diagram-flow { flex-direction: column; } .diagram-arrow { transform: rotate(90deg); align-self: flex-start; margin-left: 40px; } }
+
 .toggle-btn {
   display: inline-flex; align-items: center; gap: 6px;
   font-size: 12px; font-weight: 600; color: var(--ink-muted);
@@ -964,55 +974,39 @@ section.vis { opacity: 1; transform: none; }
           <div class="pcard-title">EngineeRing – Real-Time BLE Gesture-Control Ring</div>
           <div class="pcard-role">Software Lead</div>
           <ul class="pcard-bullets">
-            <li>Custom-built wearable ring with 6-axis IMU (accelerometer + gyroscope) streaming 14-byte BLE packets at ~100 Hz</li>
-            <li>Python host processes raw IMU data: gravity removal → low-pass filter (α=0.18) → tilt-to-velocity mapping → gesture FSM</li>
-            <li>16 distinct gestures across 3 operating modes (Regular, Typing, Presentation) — mode auto-detected via active window context</li>
-            <li>Passively records rehabilitation metrics each session: range of motion, angular velocity, smoothness, jitter &amp; fatigue indices</li>
-            <li>Outputs JSON session report + ROM vs. Time graph; designed for accessibility and post-injury physiotherapy use</li>
-          </ul
+            <li>Wearable smart ring enabling cursor navigation and gesture-based input via mid-air hand movements</li>
+            <li>Integrates IMU motion sensing with BLE for real-time computer interaction</li>
+            <li>Designed for rehabilitation — motion tracking for motor recovery and physical therapy</li>
+            <li>Python-based control software with sensor fusion, motion smoothing, and jitter reduction</li>
+            <li>Supports pointer navigation, gesture typing, presentation control, and rehab tracking</li>
+          </ul>
           <div class="pcard-links">
-            <a href="https://www.youtube.com/watch?v=fwYdecRUMGU&feature=youtu.be" class="pcard-link" target="_blank" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg> EngineeRing Demo</a><a href="https://github.com/reemoawad/EngineeRing" class="pcard-link" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg> GitHub</a><a href="EngineeRing-User-Manual.pdf" class="pcard-link" target="_blank"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg> User Manual</a><a href="Senior-Design-Poster.pdf" class="pcard-link" target="_blank"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg> Senior Design Poster</a>
+            <a href="https://drive.google.com/file/d/1_ggRnDi7R0lHPyU1-DfNuO07jlO1pXfZ/view?usp=sharing" class="pcard-link" target="_blank" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg> EngineeRing Demo</a><a href="https://github.com/reemoawad/EngineeRing" class="pcard-link" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg> GitHub</a><a href="https://docs.google.com/document/d/1BaSRCnKN8jP15wHMKBepi_PbGoTGyQJcdEy_KFJsRX4/edit?usp=sharing" class="pcard-link" target="_blank" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg> User Manual</a><a href="https://github.com/reemoawad/My-Portfolio/blob/main/Senior-Design-Poster.pdf" class="pcard-link" target="_blank" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg> Senior Design Poster</a>
           </div>
-          <div class="pcard-tech">
-            <span>Python</span><span>BLE Communication</span><span>IMU Sensor Fusion</span><span>Real-Time Input Processing</span><span>Desktop UI Development</span>
+          <div class="pcard-tags">
+            <span class="pcard-tag">Python</span><span class="pcard-tag">BLE Communication</span><span class="pcard-tag">IMU Sensor Fusion</span><span class="pcard-tag">Real-Time Input Processing</span><span class="pcard-tag">Desktop UI Development</span>
           </div>
           <div class="pcard-expand-content">
             <div class="pcard-expand-inner">
-              <p>EngineeRing is a custom-built wearable smart ring that translates wrist gestures into real-time computer control. The hardware consists of a 6-axis IMU (3-axis accelerometer + 3-axis gyroscope) and two buttons, transmitting 14-byte BLE packets at ~100 Hz over the Nordic UART Service (NUS) protocol. A Python host application receives the data, applies gravity bias removal and a low-pass exponential filter, maps the filtered tilt vector to cursor velocity, and dispatches OS-level input events via pyautogui — all with sub-frame latency. The system was designed with two real-world applications in mind: hands-free computer accessibility for users with motor impairments, and quantitative rehabilitation monitoring for wrist recovery and physical therapy.</p>
-              <p>As Software Lead, I designed and built the entire Python software system end-to-end. The signal processing pipeline runs at ~100 Hz: raw IMU bytes are decoded from BLE packets, a calibration baseline removes the gravity vector, an exponential moving average (α = 0.18) smooths the signal, and a dead-zone gate (0.04 rad) prevents cursor drift from micro-tremors. A finite state machine evaluates button timing windows to classify 16 distinct gestures across three operating modes — Regular, Typing, and Presentation — with the active mode determined automatically by checking the foreground application via AppleScript (macOS) or pygetwindow (Windows).</p>
+              <p>EngineeRing is a wearable smart ring designed to enable intuitive cursor navigation and gesture-based input through mid-air hand movements. The system integrates IMU motion sensing with Bluetooth Low Energy communication to translate gestures into real-time computer interactions. In addition to general computer interaction, the system was designed with rehabilitation applications in mind, allowing motion tracking and gesture-based exercises that can support motor recovery and physical therapy.</p>
+              <p>As the Software Lead, I developed the Python-based control software responsible for gesture interpretation and system responsiveness. I implemented sensor fusion techniques to process IMU data and designed algorithms to smooth motion input, reduce jitter, and improve interaction precision. The system supports multiple interaction modes, allowing users to switch dynamically between pointer navigation, gesture typing, presentation control, and rehabilitation-focused motion tracking to illustrate the ring's potential across assistive technology, productivity, and everyday human–computer interaction scenarios.</p>
+              <div class="pcard-diagram">
+                <p class="diagram-label">System Data Flow</p>
+                <div class="diagram-flow">
+                  <div class="diagram-block"><span class="block-title">6-axis IMU</span><span class="block-detail">Accel + Gyro</span></div>
+                  <div class="diagram-arrow">→</div>
+                  <div class="diagram-block"><span class="block-title">BLE / NUS</span><span class="block-detail">14 bytes @ ~100 Hz</span></div>
+                  <div class="diagram-arrow">→</div>
+                  <div class="diagram-block"><span class="block-title">Signal Processing</span><span class="block-detail">Filter → Tilt map</span></div>
+                  <div class="diagram-arrow">→</div>
+                  <div class="diagram-block"><span class="block-title">Gesture FSM</span><span class="block-detail">16 gestures × 3 modes</span></div>
+                  <div class="diagram-arrow">→</div>
+                  <div class="diagram-block"><span class="block-title">OS Input + Rehab</span><span class="block-detail">Cursor / JSON report</span></div>
+                </div>
+              </div>
             </div>
           </div>
           <button class="toggle-btn" onclick="toggleP(event, 'p1')">Read full description <span class="arrow">↓</span></button>
-        </div>
-      </div>
-
-      <div class="pcard" id="p2">
-        <div class="pcard-side"><div class="pcard-num">02</div></div>
-        <div class="pcard-body">
-          <div class="pcard-title">Drone Network Simulator</div>
-          <div class="pcard-role">Communication Systems · UAV Networks</div>
-          <ul class="pcard-bullets">
-            <li>Simulation environment for UAV network communication with up to 100 drones</li>
-            <li>Models physical, MAC, and routing layers under varying mobility and interference</li>
-            <li>Implemented path loss, RSSI/SNR estimation, interference modeling, and packet loss</li>
-            <li>Evaluates scalability, packet delivery, latency, and energy–throughput tradeoffs</li>
-            <li>Web-based real-time visualization of node movement and network metrics</li>
-          </ul>
-          <div class="pcard-links">
-            <a href="https://github.com/reemoawad/CompE560_DroneProject" class="pcard-link" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg> GitHub</a><a href="https://docs.google.com/document/d/1BaSRCnKN8jP15wHMKBepi_PbGoTGyQJcdEy_KFJsRX4/edit?usp=sharing" class="pcard-link" target="_blank" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg> User Manual & Download Guide</a>
-          </div>
-          <div class="pcard-tech">
-            <span>Python</span><span>Wireless Network Modeling</span><span>CSMA/CA</span><span>OLSR Routing</span><span>Network Simulation</span>
-          </div>
-          <div class="pcard-expand-content">
-            <div class="pcard-expand-inner">
-              <p>This project involved building a simulation environment to analyze communication performance in unmanned aerial vehicle (UAV) networks. The simulator models the physical, MAC, and routing layers of wireless communication to study how drone networks behave under varying mobility and interference conditions.</p>
-              <p>I contributed to the development of the physical-layer communication model, implementing log-distance path loss calculations, RSSI/SNR estimation, interference modeling, and distance-based packet loss. These models allowed the simulator to replicate realistic wireless communication behavior between drones.</p>
-              <p>The simulator supports experiments with up to 100 UAVs, enabling analysis of network scalability, packet delivery ratio, latency, and energy–throughput tradeoffs. The project was used to evaluate how routing protocols and channel conditions affect network reliability.</p>
-              <p>To showcase the system, we also developed a web-based interface that visualizes the simulated drone network in real time, allowing users to observe node movement, communication links, and network performance metrics during simulations. The interface provides an interactive way to explore how network behavior changes under different mobility patterns, interference levels, and routing configurations.</p>
-            </div>
-          </div>
-          <button class="toggle-btn" onclick="toggleP(event, 'p2')">Read full description <span class="arrow">↓</span></button>
         </div>
       </div>
 
