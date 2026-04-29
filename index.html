@@ -419,6 +419,13 @@ section.vis { opacity: 1; transform: none; }
   font-size: 12px; font-weight: 600; letter-spacing: 0.08em;
   text-transform: uppercase; color: var(--rust); margin-bottom: 16px;
 }
+.pcard-award {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 11.5px; font-weight: 600; letter-spacing: 0.04em;
+  color: #8a6200; background: #fff8e1;
+  border: 1px solid #f0c040; border-radius: 4px;
+  padding: 5px 10px; margin-bottom: 14px;
+}
 
 .pcard-bullets {
   list-style: none; display: flex; flex-direction: column; gap: 7px;
@@ -973,6 +980,7 @@ section.vis { opacity: 1; transform: none; }
         <div class="pcard-body">
           <div class="pcard-title">EngineeRing – Wearable Gesture-Input Ring with BLE &amp; Rehab Tracking</div>
           <div class="pcard-role">Software Lead</div>
+          <div class="pcard-award">🏆 Most Innovative Senior Design Project &mdash; SDSU Engineering (Dec 2025 &amp; May 2026 Graduates)</div>
           <ul class="pcard-bullets">
             <li>Engineered firmware + Python host software for a wearable ring enabling hands-free cursor control via 6-axis IMU gesture recognition at ~100 Hz</li>
             <li>BLE NUS pipeline streams 14-byte IMU packets to host; complementary filter fuses accel + gyro data to compute stable pitch/roll/yaw</li>
