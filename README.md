@@ -6,7 +6,7 @@
 
 ## What This Site Contains
 
-A focused showcase of my engineering work — not a resume clone. It covers:
+A focused showcase of my engineering work. It covers:
 
 - **Project deep-dives** with architecture, technical decisions, and outcomes
 - **Professional experience** at the City of San Diego (IT) and Practical Solutions, Inc. (AI/ML)
