@@ -1,4 +1,4 @@
-# Reem Awad — Portfolio
+# Reem Awad | Portfolio
 
 🌐 **Live Site:** [reemoawad.github.io/My-Portfolio](https://reemoawad.github.io/My-Portfolio)
 
@@ -19,7 +19,7 @@ For a quick overview, see my [GitHub profile](https://github.com/reemoawad).
 
 ## Tech Stack
 
-Built with vanilla HTML, CSS, and JavaScript. No frameworks — deliberate choice for performance and full control over layout and animation.
+Built with vanilla HTML, CSS, and JavaScript. No frameworks; this was a deliberate choice for performance and full control over layout and animation.
 
 ---
 
